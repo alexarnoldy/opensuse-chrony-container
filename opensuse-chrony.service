@@ -1,0 +1,9 @@
+[Unit]
+Description=openSUSE Chrony Podman container
+Wants=syslog.service
+[Service]
+Restart=always
+ExecStart=/usr/bin/podman start -a opensuse-chrony-container
+ExecStop=/usr/bin/podman stop -t 10 opensuse-chrony-container
+[Install]
+WantedBy=multi-user.target

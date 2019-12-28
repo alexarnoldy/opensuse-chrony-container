@@ -24,10 +24,17 @@ localhost/opensuse-chrony-container:latest
 * Check the status of the opensuse-chrony.service: `systemctl status opensuse-chrony.service`
 
 
-==== To update the chrony configuration:
+==== To update the chrony configuration
 * Update the chrony.conf file
 * Rebuild the image
 * Remove the old container and run a new one
+
+==== Troubleshooting
+* Ensure a server firewall isn’t blocking the ports (Google for how to work with your firewall)
+* From another host in the same subnet, use nmap to see if chrony is responding: `sudo nmap -sU -p 123 --script ntp-info <chrony server IP>`
+** At a minimum response containing the "receive time stamp" should be received
+
+
 
 
 // vim: set syntax=asciidoc:
