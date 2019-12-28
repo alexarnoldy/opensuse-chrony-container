@@ -1,1 +1,24 @@
+* Clone this repo to the target server: `git clone https://github.com/alexarnoldy/opensuse-chrony-container.git && cd opensuse-chrony-container`
+* Update the chrony.conf files as needed 
+** At a minimum update the "allow" line for the subnet to monitor and respond on
+* Build the container: `sudo podman build -t localhost/opensuse-chrony-container:latest .`
+
+
+* Set this variable to the IP address chrony should listen on: `export CHRONY_IP=`
+* Run the container:
+----
+sudo podman run -d --name opensuse-chrony-container \
+-p ${CHRONY_IP}:123:123/udp \
+--cap-add=NET_ADMIN \
+--net host \
+--cap-add SYS_TIME \
+localhost/opensuse-chrony-container:latest
+----
+* Ensure the container is running: `sudo podman ps -a`
+** The "STATUS" field should show the amount of time the container has been running
+** If the STATUS is EXITED, run the command `sudo podman logs opensuse-chrony-container` to see the error that stopped the container
+* Ensure that port 123 is being monitored: `ss -npr --listening`
+
+
+
 // vim: set syntax=asciidoc:
