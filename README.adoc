@@ -18,7 +18,16 @@ localhost/opensuse-chrony-container:latest
 ** The "STATUS" field should show the amount of time the container has been running
 ** If the STATUS is EXITED, run the command `sudo podman logs opensuse-chrony-container` to see the error that stopped the container
 * Ensure that port 123 is being monitored: `ss -npr --listening`
+* Copy the opensuse-chrony.service systemd file into place: `sudo cp -p opensuse-chrony.service /etc/systemd/system/`
+* Reload systemd: `sudo systemctl daemon-reload`
+* Start and enable the systemd opensuse-chrony.service: `sudo systemctl --now enable opensuse-chrony.service`
+* Check the status of the opensuse-chrony.service: `systemctl status opensuse-chrony.service`
 
+
+==== To update the chrony configuration:
+* Update the chrony.conf file
+* Rebuild the image
+* Remove the old container and run a new one
 
 
 // vim: set syntax=asciidoc:
