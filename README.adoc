@@ -39,7 +39,7 @@ IMPORTANT: There were lots of problems with chronyd refusing to start after syst
 * From another host in the same subnet, use nmap to see if chrony is responding: `sudo nmap -sU -p 123 --script ntp-info <chrony server IP>`
 ** At a minimum response containing the "receive time stamp" should be received
 
-
+NOTE: To make HA, run multiple instances in the same subnet with identical configurations. Run an instance of https://github.com/alexarnoldy/opensuse-keepalived-container with each to manage a virtual IP address
 
 
 // vim: set syntax=asciidoc:
