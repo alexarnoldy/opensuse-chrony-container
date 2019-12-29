@@ -14,6 +14,9 @@ sudo podman run -d --name opensuse-chrony-container \
 --cap-add SYS_TIME \
 localhost/opensuse-chrony-container:latest
 ----
+
+IMPORTANT: There were lots of problems with chronyd refusing to start after system reboot due to the presence of a PID file. A PID file doesn't make much sense in the case of a container so script just removes it before starting chronyd. The disadvantage is that it seems to automatically restart when trying to stop it. To stop it, just string together stop and rm commands; then run it again as above, when needed.
+
 * Ensure the container is running: `sudo podman ps -a`
 ** The "STATUS" field should show the amount of time the container has been running
 ** If the STATUS is EXITED, run the command `sudo podman logs opensuse-chrony-container` to see the error that stopped the container
